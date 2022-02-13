@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using CharityCalculator.Application.Contracts.Persistence;
 using CharityCalculator.Application.Exceptions;
 using CharityCalculator.Application.Features.EventTypes.Requests.Commands;
-using CharityCalculator.Application.Persistence.Contracts;
 using MediatR;
 
 namespace CharityCalculator.Application.Features.EventTypes.Handlers.Commands

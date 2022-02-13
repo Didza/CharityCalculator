@@ -1,26 +1,25 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using CharityCalculator.Application.DTOs;
+using CharityCalculator.Application.Contracts.Persistence;
 using CharityCalculator.Application.DTOs.EventType;
 using CharityCalculator.Application.Extensions;
 using CharityCalculator.Application.Features.EventTypes.Requests;
-using CharityCalculator.Application.Persistence.Contracts;
 using MediatR;
 
 namespace CharityCalculator.Application.Features.EventTypes.Handlers.Queries
 {
     public class GetEventTypeListRequestHandler : IRequestHandler<GetEventTypeListRequest, List<EventTypeDto>>
     {
-        private readonly IEventTypeRepository _eventTypeRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public GetEventTypeListRequestHandler(IEventTypeRepository eventTypeRepository)
+        public GetEventTypeListRequestHandler(IUnitOfWork unitOfWork)
         {
-            _eventTypeRepository = eventTypeRepository;
+            _unitOfWork = unitOfWork;
         }
         public async Task<List<EventTypeDto>> Handle(GetEventTypeListRequest request, CancellationToken cancellationToken)
         {
-            var eventTypes = await _eventTypeRepository.GetAll();
+            var eventTypes = await _unitOfWork.EventTypeRepository.GetAll();
             return eventTypes.ToEventTypesDto();
         }
     }

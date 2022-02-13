@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
-namespace CharityCalculator.Application.Persistence.Contracts
+namespace CharityCalculator.Application.Contracts.Persistence
 {
     public interface IUnitOfWork
     {

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CharitiyCalculator.Application\CharityCalculator.Application.csproj" />
+    <ProjectReference Include="..\CharityCalculator.Infrastructure\CharityCalculator.Infrastructure.csproj" />
+    <ProjectReference Include="..\CharityCalculator.Persistence\CharityCalculator.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>
