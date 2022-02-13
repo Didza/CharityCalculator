@@ -1,5 +1,6 @@
 ﻿using System;
 using CharityCalculator.Application.DTOs;
+using CharityCalculator.Application.DTOs.EventType;
 using MediatR;
 
 namespace CharityCalculator.Application.Features.EventTypes.Requests.Queries

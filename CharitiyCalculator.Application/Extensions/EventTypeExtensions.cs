@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CharityCalculator.Application.DTOs;
+using CharityCalculator.Application.DTOs.EventType;
 using CharityCalculator.Domain.Models;
 
 namespace CharityCalculator.Application.Extensions

@@ -1,4 +1,5 @@
 ﻿using CharityCalculator.Application.DTOs;
+using CharityCalculator.Application.DTOs.EventType;
 using CharityCalculator.Application.Responses;
 using MediatR;
 

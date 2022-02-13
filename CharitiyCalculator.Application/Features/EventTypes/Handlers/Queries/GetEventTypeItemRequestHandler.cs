@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using CharityCalculator.Application.DTOs;
+using CharityCalculator.Application.DTOs.EventType;
 using CharityCalculator.Application.Extensions;
 using CharityCalculator.Application.Features.EventTypes.Requests.Queries;
 using CharityCalculator.Application.Persistence.Contracts;

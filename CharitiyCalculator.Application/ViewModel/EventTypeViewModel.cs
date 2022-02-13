@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using CharityCalculator.Application.DTOs.Common;
 
-namespace CharityCalculator.Application.DTOs
+namespace CharityCalculator.Application.ViewModel
 {
-    public class EventTypeDto : BaseDto
+    public class EventTypeViewModel
     {
         public string Name { get; set; }
         public decimal SupplementInPercentage { get; set; }

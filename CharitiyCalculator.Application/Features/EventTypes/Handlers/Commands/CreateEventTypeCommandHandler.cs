@@ -8,7 +8,7 @@ using MediatR;
 
 namespace CharityCalculator.Application.Features.EventTypes.Handlers.Commands
 {
-    public class CreateEventTypeCommandHandler : IRequestHandler<CreateEventTypeCommand, BaseCommandResponse>
+    public class CreateEventTypeCommandHandler : IRequestHandler<CreateEventTypeCommand, BaseResponse>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -16,14 +16,14 @@ namespace CharityCalculator.Application.Features.EventTypes.Handlers.Commands
         {
             _unitOfWork = unitOfWork;
         }
-        public async  Task<BaseCommandResponse> Handle(CreateEventTypeCommand request, CancellationToken cancellationToken)
+        public async  Task<BaseResponse> Handle(CreateEventTypeCommand request, CancellationToken cancellationToken)
         {
             var newEventType = request.EventTypeDto.ToEventType();
 
             var eventType = await _unitOfWork.EventTypeRepository.GetByName(newEventType.Name);
 
             if (eventType != null)
-                return new BaseCommandResponse()
+                return new BaseResponse()
                 {
                     Success = true,
                     Message = "Event Type Already Exist",
@@ -33,7 +33,7 @@ namespace CharityCalculator.Application.Features.EventTypes.Handlers.Commands
             eventType = await _unitOfWork.EventTypeRepository.Add(newEventType);
             await _unitOfWork.Save();
 
-            return new BaseCommandResponse()
+            return new BaseResponse()
             {
                 Success = true,
                 Message = "Creation Successful",
