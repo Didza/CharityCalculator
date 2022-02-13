@@ -15,9 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{B02E8CED-6D1A-4E75-BC42-20C2106D6417}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharityCalculator.Domain", "CharitiyCalculator.Domain\CharityCalculator.Domain.csproj", "{ED0AAEE3-C5FE-496C-988C-F3E6EF593C98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CharityCalculator.Domain", "CharitiyCalculator.Domain\CharityCalculator.Domain.csproj", "{ED0AAEE3-C5FE-496C-988C-F3E6EF593C98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharityCalculator.Domain.Tests", "CharityCalculator.Domain.Tests\CharityCalculator.Domain.Tests.csproj", "{0EEE5DFC-6F78-4F3E-8440-F808B050F71A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CharityCalculator.Domain.Tests", "CharityCalculator.Domain.Tests\CharityCalculator.Domain.Tests.csproj", "{0EEE5DFC-6F78-4F3E-8440-F808B050F71A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharityCalculator.Application", "CharitiyCalculator.Application\CharityCalculator.Application.csproj", "{19E7F683-F3DE-437E-93D2-8AB7D359D83A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{0EEE5DFC-6F78-4F3E-8440-F808B050F71A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EEE5DFC-6F78-4F3E-8440-F808B050F71A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EEE5DFC-6F78-4F3E-8440-F808B050F71A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19E7F683-F3DE-437E-93D2-8AB7D359D83A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19E7F683-F3DE-437E-93D2-8AB7D359D83A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19E7F683-F3DE-437E-93D2-8AB7D359D83A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19E7F683-F3DE-437E-93D2-8AB7D359D83A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +50,7 @@ Global
 		{B02E8CED-6D1A-4E75-BC42-20C2106D6417} = {B627109D-3156-40DA-8108-0EC22E54CBD9}
 		{ED0AAEE3-C5FE-496C-988C-F3E6EF593C98} = {D1FA6E52-CCF0-499A-B29E-48B099494847}
 		{0EEE5DFC-6F78-4F3E-8440-F808B050F71A} = {590C6ADB-62C6-40C0-AE57-679F2C90A2D0}
+		{19E7F683-F3DE-437E-93D2-8AB7D359D83A} = {D1FA6E52-CCF0-499A-B29E-48B099494847}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {123D7994-2083-476F-AA9A-AD0C3BE81F4E}
