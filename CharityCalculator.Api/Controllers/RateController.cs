@@ -69,8 +69,8 @@ namespace CharityCalculator.Api.Controllers
             return NoContent();
         }
 
-        // GET: api/<RateController>/DeductibleAmount
-        [HttpGet("DeductibleAmount")]
+        // GET: api/<RateController>/GetDeductibleAmount
+        [HttpGet("GetDeductibleAmount")]
         public async Task<decimal> GetDeductibleAmount(DeductibleAmountDto deductibleAmountDto)
         {
             var deductibleAmount = await _mediator.Send(new GetDeductibleAmountRequest{DeductibleAmountDto = deductibleAmountDto});

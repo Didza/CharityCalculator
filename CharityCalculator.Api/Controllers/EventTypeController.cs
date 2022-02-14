@@ -65,5 +65,13 @@ namespace CharityCalculator.Api.Controllers
             await _mediator.Send(new DeleteEventTypeCommand { Id = id});
             return NoContent();
         }
+
+        // GET api/<EventTypeController>/GetDonationOptimalSplits
+        [HttpGet("GetDonationOptimalSplits")]
+        public async Task<List<decimal>> GetDonationOptimalSplits(DonationOptimalSplitDto donationOptimalSplitDto)
+        {
+            var optimalSplits = await _mediator.Send(new GetDonationOptimalSplitRequest { DonationOptimalSplitDto = donationOptimalSplitDto });
+            return optimalSplits;
+        }
     }
 }
