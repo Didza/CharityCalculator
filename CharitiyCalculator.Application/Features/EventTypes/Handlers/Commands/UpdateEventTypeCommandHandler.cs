@@ -17,20 +17,22 @@ namespace CharityCalculator.Application.Features.EventTypes.Handlers.Commands
         }
         public async Task<Unit> Handle(UpdateEventTypeCommand request, CancellationToken cancellationToken)
         {
-            var eventType = await _unitOfWork.EventTypeRepository.Get(request.EventTypeDto.Id);
+            using (_unitOfWork)
+            {
+                var eventType = await _unitOfWork.EventTypeRepository.Get(request.EventTypeDto.Id);
 
-            if (eventType is null)
-                throw new NotFoundException(nameof(eventType), request.EventTypeDto.Id);
+                if (eventType is null)
+                    throw new NotFoundException(nameof(eventType), request.EventTypeDto.Id);
 
-            eventType.Name = request.EventTypeDto.Name;
-            eventType.SetSupplementPercentage(request.EventTypeDto.SupplementInPercentage);
-            eventType.SetMaximumDonationAmount(request.EventTypeDto.MaximumDonationAmount);
+                eventType.Name = request.EventTypeDto.Name;
+                eventType.SetSupplementPercentage(request.EventTypeDto.SupplementInPercentage);
+                eventType.SetMaximumDonationAmount(request.EventTypeDto.MaximumDonationAmount);
 
-            await _unitOfWork.EventTypeRepository.Update(eventType);
-            await _unitOfWork.Save();
+                await _unitOfWork.EventTypeRepository.Update(eventType);
+                await _unitOfWork.Save();
 
-            return Unit.Value;
-
+                return Unit.Value;
+            }
         }
     }
 }

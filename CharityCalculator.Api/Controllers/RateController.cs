@@ -69,7 +69,7 @@ namespace CharityCalculator.Api.Controllers
             return NoContent();
         }
 
-        // GET: api/<RateController>
+        // GET: api/<RateController>/DeductibleAmount
         [HttpGet("DeductibleAmount")]
         public async Task<decimal> GetDeductibleAmount(DeductibleAmountDto deductibleAmountDto)
         {

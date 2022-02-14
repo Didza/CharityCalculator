@@ -18,28 +18,30 @@ namespace CharityCalculator.Application.Features.EventTypes.Handlers.Commands
         }
         public async  Task<BaseResponse> Handle(CreateEventTypeCommand request, CancellationToken cancellationToken)
         {
-            var newEventType = request.EventTypeDto.ToEventType();
+            using (_unitOfWork)
+            {
+                var newEventType = request.EventTypeDto.ToEventType();
 
-            var eventType = await _unitOfWork.EventTypeRepository.GetByName(newEventType.Name);
+                var eventType = await _unitOfWork.EventTypeRepository.GetByName(newEventType.Name);
 
-            if (eventType != null)
+                if (eventType != null)
+                    return new BaseResponse()
+                    {
+                        Success = true,
+                        Message = "Event Type Already Exist",
+                        Id = eventType.Id
+                    };
+
+                eventType = await _unitOfWork.EventTypeRepository.Add(newEventType);
+                await _unitOfWork.Save();
+
                 return new BaseResponse()
                 {
                     Success = true,
-                    Message = "Event Type Already Exist",
+                    Message = "Creation Successful",
                     Id = eventType.Id
                 };
-
-            eventType = await _unitOfWork.EventTypeRepository.Add(newEventType);
-            await _unitOfWork.Save();
-
-            return new BaseResponse()
-            {
-                Success = true,
-                Message = "Creation Successful",
-                Id = eventType.Id
-            };
-
+            }
         }
     }
 }

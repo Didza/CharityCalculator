@@ -18,15 +18,18 @@ namespace CharityCalculator.Application.Features.EventTypes.Handlers.Commands
 
         public async Task<Unit> Handle(DeleteEventTypeCommand request, CancellationToken cancellationToken)
         {
-            var eventType = await _unitOfWork.EventTypeRepository.Get(request.Id);
+            using (_unitOfWork)
+            {
+                var eventType = await _unitOfWork.EventTypeRepository.Get(request.Id);
 
-            if (eventType == null)
-                throw new NotFoundException(nameof(eventType), request.Id);
+                if (eventType == null)
+                    throw new NotFoundException(nameof(eventType), request.Id);
 
-            await _unitOfWork.EventTypeRepository.Delete(eventType);
-            await _unitOfWork.Save();
+                await _unitOfWork.EventTypeRepository.Delete(eventType);
+                await _unitOfWork.Save();
 
-            return Unit.Value;
+                return Unit.Value;
+            }
         }
     }
 }

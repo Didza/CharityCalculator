@@ -18,15 +18,18 @@ namespace CharityCalculator.Application.Features.Rates.Handlers.Commands
 
         public async Task<Unit> Handle(DeleteRateCommand request, CancellationToken cancellationToken)
         {
-            var rate = await _unitOfWork.RateRepository.Get(request.Id);
+            using (_unitOfWork)
+            {
+                var rate = await _unitOfWork.RateRepository.Get(request.Id);
 
-            if (rate == null)
-                throw new NotFoundException(nameof(rate), request.Id);
+                if (rate == null)
+                    throw new NotFoundException(nameof(rate), request.Id);
 
-            await _unitOfWork.RateRepository.Delete(rate);
-            await _unitOfWork.Save();
+                await _unitOfWork.RateRepository.Delete(rate);
+                await _unitOfWork.Save();
 
-            return Unit.Value;
+                return Unit.Value;
+            }
         }
     }
 }

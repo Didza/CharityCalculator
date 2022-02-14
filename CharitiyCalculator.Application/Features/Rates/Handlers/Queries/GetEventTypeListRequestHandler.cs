@@ -21,8 +21,11 @@ namespace CharityCalculator.Application.Features.Rates.Handlers.Queries
         }
         public async Task<List<RateDto>> Handle(GetRateListRequest request, CancellationToken cancellationToken)
         {
-            var rates = await _unitOfWork.RateRepository.GetAll();
-            return rates.ToRatesDto();
+            using (_unitOfWork)
+            {
+                var rates = await _unitOfWork.RateRepository.GetAll();
+                return rates.ToRatesDto();
+            }
         }
     }
 }

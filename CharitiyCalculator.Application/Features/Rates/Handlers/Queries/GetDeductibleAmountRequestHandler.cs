@@ -22,14 +22,17 @@ namespace CharityCalculator.Application.Features.Rates.Handlers.Queries
         }
         public async Task<decimal> Handle(GetDeductibleAmountRequest request, CancellationToken cancellationToken)
         {
-            var rate = await _unitOfWork.RateRepository.GetByRateType(request.DeductibleAmountDto.RateType);
+            using (_unitOfWork)
+            {
+                var rate = await _unitOfWork.RateRepository.GetByRateType(request.DeductibleAmountDto.RateType);
 
-            if (rate is null)
-                throw new NotFoundException(nameof(rate), request.DeductibleAmountDto.RateType);
+                if (rate is null)
+                    throw new NotFoundException(nameof(rate), request.DeductibleAmountDto.RateType);
 
-            var eventType = await _unitOfWork.EventTypeRepository.Get(request.DeductibleAmountDto.EventTypeDtoId);
+                var eventType = await _unitOfWork.EventTypeRepository.Get(request.DeductibleAmountDto.EventTypeDtoId);
 
-            return rate.CalculateDeductibleAmount(request.DeductibleAmountDto.DonationAmount, eventType);
+                return rate.CalculateDeductibleAmount(request.DeductibleAmountDto.DonationAmount, eventType);
+            }
         }
     }
 }

@@ -19,8 +19,11 @@ namespace CharityCalculator.Application.Features.EventTypes.Handlers.Queries
         }
         public async Task<List<EventTypeDto>> Handle(GetEventTypeListRequest request, CancellationToken cancellationToken)
         {
-            var eventTypes = await _unitOfWork.EventTypeRepository.GetAll();
-            return eventTypes.ToEventTypesDto();
+            using (_unitOfWork)
+            {
+                var eventTypes = await _unitOfWork.EventTypeRepository.GetAll();
+                return eventTypes.ToEventTypesDto();
+            }
         }
     }
 }

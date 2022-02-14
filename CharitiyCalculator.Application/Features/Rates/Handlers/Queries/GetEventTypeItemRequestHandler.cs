@@ -20,8 +20,11 @@ namespace CharityCalculator.Application.Features.Rates.Handlers.Queries
 
         public async Task<RateDto> Handle(GetRateItemRequest request, CancellationToken cancellationToken)
         {
-            var rate = await _unitOfWork.RateRepository.Get(request.Id);
-            return rate.ToRateDto();
+            using (_unitOfWork)
+            {
+                var rate = await _unitOfWork.RateRepository.Get(request.Id);
+                return rate.ToRateDto();
+            }
         }
     }
 }
