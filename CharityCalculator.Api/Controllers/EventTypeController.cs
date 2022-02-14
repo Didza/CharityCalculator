@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using CharityCalculator.Application.DTOs.EventType;
 using CharityCalculator.Application.Features.EventTypes.Requests;
+using CharityCalculator.Application.Features.EventTypes.Requests.Commands;
 using CharityCalculator.Application.Features.EventTypes.Requests.Queries;
+using CharityCalculator.Application.Responses;
 using MediatR;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -29,7 +31,7 @@ namespace CharityCalculator.Api.Controllers
             return eventTypes;
         }
 
-        // GET api/<EventTypeController>/5
+        // GET api/<EventTypeController>/guid
         [HttpGet("{id}")]
         public async Task<EventTypeDto> Get(Guid id)
         {
@@ -39,20 +41,27 @@ namespace CharityCalculator.Api.Controllers
 
         // POST api/<EventTypeController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<BaseResponse> Post([FromBody] EventTypeDto eventType)
         {
+            var baseResponse = await _mediator.Send(new CreateEventTypeCommand{EventTypeDto = eventType});
+            return baseResponse;
         }
 
-        // PUT api/<EventTypeController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // PUT api/<EventTypeController>
+        [HttpPut]
+        public async Task<ActionResult> Put([FromBody] EventTypeDto eventType)
         {
+            await _mediator.Send(new UpdateEventTypeCommand { EventTypeDto = eventType });
+            return NoContent();
+
         }
 
-        // DELETE api/<EventTypeController>/5
+        // DELETE api/<EventTypeController>/guid
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult> Delete(Guid id)
         {
+            await _mediator.Send(new DeleteEventTypeCommand { Id = id});
+            return NoContent();
         }
     }
 }

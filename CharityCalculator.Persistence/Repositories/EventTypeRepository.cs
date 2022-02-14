@@ -16,7 +16,7 @@ namespace CharityCalculator.Persistence.Repositories
 
         public async Task<EventType> GetByName(string name)
         {
-            return await _dbContext.EventTypes.FirstOrDefaultAsync(x => x.Name == name);
+            return await _dbContext.EventTypes.FirstOrDefaultAsync(x => x.Name.ToLower() == name.ToLower());
         }
     }
 }
