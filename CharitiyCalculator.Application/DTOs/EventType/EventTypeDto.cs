@@ -14,21 +14,5 @@ namespace CharityCalculator.Application.DTOs.EventType
         public decimal SupplementInPercentage { get; set; }
         public decimal MaximumDonationAmount { get; set; }
 
-        public static async Task<EventTypeDto> FromJson(EventTypeViewModel eventTypeViewModel)
-        {
-            var eventTypeDto = new EventTypeDto()
-            {
-                Name = eventTypeViewModel.Name,
-                SupplementInPercentage = eventTypeViewModel.SupplementInPercentage,
-                MaximumDonationAmount = eventTypeViewModel.MaximumDonationAmount
-            };
-            var validator = new EventTypeDtoValidator();
-            var validationResult = await validator.ValidateAsync(eventTypeDto);
-
-            if (validationResult.IsValid == false)
-                throw new ValidationException(validationResult);
-
-            return eventTypeDto;
-        }
     }
 }

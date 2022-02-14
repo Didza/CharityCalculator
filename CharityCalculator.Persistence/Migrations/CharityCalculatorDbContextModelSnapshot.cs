@@ -43,6 +43,35 @@ namespace CharityCalculator.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("EventTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("46c3a42c-e57c-4dd6-8d3f-a07049867d1d"),
+                            DateCreated = new DateTime(2022, 2, 14, 21, 57, 13, 750, DateTimeKind.Local).AddTicks(5514),
+                            LastModified = new DateTime(2022, 2, 14, 21, 57, 13, 751, DateTimeKind.Local).AddTicks(5079),
+                            MaximumDonationAmount = 100000m,
+                            Name = "Sports",
+                            SupplementInPercentage = 5m
+                        },
+                        new
+                        {
+                            Id = new Guid("a1d9e128-a54c-4ac5-a8d4-cbb902f05d45"),
+                            DateCreated = new DateTime(2022, 2, 14, 21, 57, 13, 751, DateTimeKind.Local).AddTicks(9720),
+                            LastModified = new DateTime(2022, 2, 14, 21, 57, 13, 751, DateTimeKind.Local).AddTicks(9727),
+                            MaximumDonationAmount = 100000m,
+                            Name = "Political",
+                            SupplementInPercentage = 3m
+                        },
+                        new
+                        {
+                            Id = new Guid("eaa00086-4626-4a46-8f7b-b4285e0b9950"),
+                            DateCreated = new DateTime(2022, 2, 14, 21, 57, 13, 751, DateTimeKind.Local).AddTicks(9739),
+                            LastModified = new DateTime(2022, 2, 14, 21, 57, 13, 751, DateTimeKind.Local).AddTicks(9740),
+                            MaximumDonationAmount = 100000m,
+                            Name = "Other",
+                            SupplementInPercentage = 0m
+                        });
                 });
 
             modelBuilder.Entity("CharityCalculator.Domain.Models.Rate", b =>
@@ -65,7 +94,20 @@ namespace CharityCalculator.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RateType")
+                        .IsUnique();
+
                     b.ToTable("Rates");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("62ab6a74-e769-4f54-8e5c-5ef891d9b1f5"),
+                            DateCreated = new DateTime(2022, 2, 14, 21, 57, 13, 771, DateTimeKind.Local).AddTicks(7164),
+                            LastModified = new DateTime(2022, 2, 14, 21, 57, 13, 771, DateTimeKind.Local).AddTicks(7189),
+                            RateInPercentage = 20m,
+                            RateType = 1
+                        });
                 });
 #pragma warning restore 612, 618
         }

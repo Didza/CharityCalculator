@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CharityCalculator.Api.Middleware;
 using CharityCalculator.Application;
 using CharityCalculator.Infrastructure;
 using CharityCalculator.Persistence;
@@ -61,6 +62,8 @@ namespace CharityCalculator.Api
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CharityCalculator.Api v1"));
             }
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 

@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using CharityCalculator.Application.DTOs;
 using CharityCalculator.Application.DTOs.EventType;
+using CharityCalculator.Application.DTOs.EventType.Validators;
+using CharityCalculator.Application.Exceptions;
 using CharityCalculator.Domain.Models;
 
 namespace CharityCalculator.Application.Extensions
@@ -30,6 +33,17 @@ namespace CharityCalculator.Application.Extensions
         public static EventType ToEventType(this EventTypeDto eventTypeDto)
         {
             return new EventType(eventTypeDto.Name, eventTypeDto.SupplementInPercentage, eventTypeDto.MaximumDonationAmount);
+
+        }
+
+        public static async Task ValidateEventTypeDto(this EventTypeDto eventTypeDto)
+        {
+
+            var validator = new EventTypeDtoValidator();
+            var validationResult = await validator.ValidateAsync(eventTypeDto);
+
+            if (validationResult.IsValid == false)
+                throw new ValidationException(validationResult);
 
         }
     }

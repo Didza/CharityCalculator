@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using CharityCalculator.Application.DTOs;
-using CharityCalculator.Application.DTOs.EventType;
+using System.Threading.Tasks;
 using CharityCalculator.Application.DTOs.Rate;
+using CharityCalculator.Application.DTOs.Rate.Validators;
+using CharityCalculator.Application.Exceptions;
 using CharityCalculator.Domain.Models;
 
 namespace CharityCalculator.Application.Extensions
@@ -30,6 +29,17 @@ namespace CharityCalculator.Application.Extensions
         public static Rate ToRate(this RateDto rateDto)
         {
             return new Rate(rateDto.RateType, rateDto.RateInPercentage);
+
+        }
+
+        public static async Task ValidateRateDto(this RateDto rateDto)
+        {
+
+            var validator = new RateDtoValidator();
+            var validationResult = await validator.ValidateAsync(rateDto);
+
+            if (validationResult.IsValid == false)
+                throw new ValidationException(validationResult);
 
         }
     }

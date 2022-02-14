@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CharityCalculator.Application.DTOs;
 using CharityCalculator.Application.DTOs.Rate;
+using CharityCalculator.Application.Extensions;
 using CharityCalculator.Application.Features.EventTypes.Requests.Commands;
 using CharityCalculator.Application.Features.Rates.Requests.Commands;
 using CharityCalculator.Application.Features.Rates.Requests.Queries;
@@ -46,6 +47,7 @@ namespace CharityCalculator.Api.Controllers
         [HttpPost]
         public async Task<BaseResponse> Post([FromBody] RateDto rateDto)
         {
+            await rateDto.ValidateRateDto();
             var baseResponse = await _mediator.Send(new CreateRateCommand { RateDto = rateDto });
             return baseResponse;
         }
@@ -54,6 +56,7 @@ namespace CharityCalculator.Api.Controllers
         [HttpPut]
         public async Task<ActionResult> Put([FromBody] RateDto rateDto)
         {
+            await rateDto.ValidateRateDto();
             await _mediator.Send(new UpdateRateCommand { RateDto = rateDto });
             return NoContent();
         }
@@ -64,6 +67,14 @@ namespace CharityCalculator.Api.Controllers
         {
             await _mediator.Send(new DeleteRateCommand { Id = id });
             return NoContent();
+        }
+
+        // GET: api/<RateController>
+        [HttpGet("DeductibleAmount")]
+        public async Task<decimal> GetDeductibleAmount(DeductibleAmountDto deductibleAmountDto)
+        {
+            var deductibleAmount = await _mediator.Send(new GetDeductibleAmountRequest{DeductibleAmountDto = deductibleAmountDto});
+            return deductibleAmount;
         }
     }
 }
