@@ -9,7 +9,6 @@ using CharityCalculator.Application.Features.EventTypes.Requests.Queries;
 using CharityCalculator.Application.Responses;
 using MediatR;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CharityCalculator.Api.Controllers
 {
@@ -27,16 +26,16 @@ namespace CharityCalculator.Api.Controllers
         [HttpGet]
         public async Task<List<EventTypeDto>> Get()
         {
-            var eventTypes = await _mediator.Send(new GetEventTypeListRequest());
-            return eventTypes;
+            var eventTypesDto = await _mediator.Send(new GetEventTypeListRequest());
+            return eventTypesDto;
         }
 
         // GET api/<EventTypeController>/guid
         [HttpGet("{id}")]
         public async Task<EventTypeDto> Get(Guid id)
         {
-            var eventType = await _mediator.Send(new GetEventTypeItemRequest{Id = id});
-            return eventType;
+            var eventTypeDto = await _mediator.Send(new GetEventTypeItemRequest{Id = id});
+            return eventTypeDto;
         }
 
         // POST api/<EventTypeController>

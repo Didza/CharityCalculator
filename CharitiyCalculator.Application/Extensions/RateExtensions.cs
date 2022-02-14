@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using CharityCalculator.Application.DTOs;
 using CharityCalculator.Application.DTOs.EventType;
+using CharityCalculator.Application.DTOs.Rate;
 using CharityCalculator.Domain.Models;
 
 namespace CharityCalculator.Application.Extensions

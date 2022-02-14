@@ -1,7 +1,7 @@
 ﻿using CharityCalculator.Application.DTOs.Common;
 using static CharityCalculator.Domain.Types.Enums;
 
-namespace CharityCalculator.Application.DTOs
+namespace CharityCalculator.Application.DTOs.Rate
 {
     public class RateDto : BaseDto
     {
