@@ -4,6 +4,7 @@ using CharityCalculator.Application.Contracts.Persistence;
 using CharityCalculator.Application.DTOs;
 using CharityCalculator.Application.Extensions;
 using CharityCalculator.Application.Features.EventTypes.Requests.Queries;
+using CharityCalculator.Application.Features.Rates.Requests.Queries;
 using MediatR;
 
 namespace CharityCalculator.Application.Features.Rates.Handlers.Queries

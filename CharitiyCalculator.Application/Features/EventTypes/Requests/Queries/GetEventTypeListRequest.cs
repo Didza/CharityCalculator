@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using CharityCalculator.Application.DTOs;
 using CharityCalculator.Application.DTOs.EventType;
 using MediatR;
 

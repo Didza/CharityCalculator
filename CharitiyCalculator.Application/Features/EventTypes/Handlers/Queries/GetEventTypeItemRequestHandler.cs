@@ -8,7 +8,7 @@ using MediatR;
 
 namespace CharityCalculator.Application.Features.EventTypes.Handlers.Queries
 {
-    public class GetEventTypeItemRequestHandler : IRequestHandler<GetRateItemRequest, EventTypeDto>
+    public class GetEventTypeItemRequestHandler : IRequestHandler<GetEventTypeItemRequest, EventTypeDto>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -17,7 +17,7 @@ namespace CharityCalculator.Application.Features.EventTypes.Handlers.Queries
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<EventTypeDto> Handle(GetRateItemRequest request, CancellationToken cancellationToken)
+        public async Task<EventTypeDto> Handle(GetEventTypeItemRequest request, CancellationToken cancellationToken)
         {
             var eventType = await _unitOfWork.EventTypeRepository.Get(request.Id);
             return eventType.ToEventTypeDto();
