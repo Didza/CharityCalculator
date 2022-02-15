@@ -11,9 +11,9 @@ namespace CharityCalculator.UI.Contracts
     {
         Task<List<RateVM>> GetRates();
         Task<RateVM> GetRate(Guid id);
-        Task<Response<int>> CreateRate(RateVM rate);
+        Task<Response<Guid>> CreateRate(RateVM rate);
         Task<Response<int>> UpdateRate(RateVM rate);
         Task<Response<int>> DeleteRate(Guid id);
-        Task<decimal> GetDeductibleAmount(DeductibleAmountVM deductibleAmount);
+        Task<double> GetDeductibleAmount(DeductibleAmountVM deductibleAmount);
     }
 }

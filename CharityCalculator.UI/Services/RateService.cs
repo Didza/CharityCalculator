@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using CharityCalculator.UI.Contracts;
@@ -8,41 +9,41 @@ using CharityCalculator.UI.Services.Base;
 
 namespace CharityCalculator.UI.Services
 {
-    public class EventTypeService : BaseHttpService, IEventTypeService
+    public class RateService : BaseHttpService, IRateService
     {
         private readonly ILocalStorageService _localStorageService;
         private readonly IMapper _mapper;
         private readonly IClient _httpclient;
 
-        public EventTypeService(IMapper mapper, IClient httpclient, ILocalStorageService localStorageService) : base(httpclient, localStorageService)
+        public RateService(IMapper mapper, IClient httpclient, ILocalStorageService localStorageService) : base(httpclient, localStorageService)
         {
-            this._localStorageService = localStorageService;
-            this._mapper = mapper;
-            this._httpclient = httpclient;
+            _httpclient = httpclient;
+            _mapper = mapper;
+            _localStorageService = localStorageService;
         }
 
-        public async Task<List<EventTypeVM>> GetEventTypes()
-        {
-            AddBearerToken();
-            var eventTypes = await _client.EventTypeAllAsync();
-            return _mapper.Map<List<EventTypeVM>>(eventTypes);
-        }
-
-        public async Task<EventTypeVM> GetEventType(Guid id)
+        public async Task<List<RateVM>> GetRates()
         {
             AddBearerToken();
-            var eventType = await _client.EventTypeGETAsync(id);
-            return _mapper.Map<EventTypeVM>(eventType);
+            var rates = await _client.RateAllAsync();
+            return _mapper.Map<List<RateVM>>(rates);
         }
 
-        public async Task<Response<Guid>> CreateEventType(EventTypeVM eventType)
+        public async Task<RateVM> GetRate(Guid id)
+        {
+            AddBearerToken();
+            var rates = await _client.RateGETAsync(id);
+            return _mapper.Map<RateVM>(rates);
+        }
+
+        public async Task<Response<Guid>> CreateRate(RateVM rate)
         {
             try
             {
                 var response = new Response<Guid>();
-                EventTypeDto createLeaveType = _mapper.Map<EventTypeDto>(eventType);
+                RateDto createRate = _mapper.Map<RateDto>(rate);
                 AddBearerToken();
-                var apiResponse = await _client.EventTypePOSTAsync(createLeaveType);
+                var apiResponse = await _client.RatePOSTAsync(createRate);
                 if (apiResponse.Success)
                 {
                     response.Data = apiResponse.Id;
@@ -63,13 +64,13 @@ namespace CharityCalculator.UI.Services
             }
         }
 
-        public async Task<Response<int>> UpdateEventType(EventTypeVM eventType)
+        public async Task<Response<int>> UpdateRate(RateVM rate)
         {
             try
             {
-                EventTypeDto eventTypeDto = _mapper.Map<EventTypeDto>(eventType);
+                RateDto rateDto = _mapper.Map<RateDto>(rate);
                 AddBearerToken();
-                await _client.EventTypePUTAsync(eventTypeDto);
+                await _client.RatePUTAsync(rateDto);
                 return new Response<int>() { Success = true };
             }
             catch (ApiException ex)
@@ -78,12 +79,12 @@ namespace CharityCalculator.UI.Services
             }
         }
 
-        public async Task<Response<int>> DeleteEventType(Guid id)
+        public async Task<Response<int>> DeleteRate(Guid id)
         {
             try
             {
                 AddBearerToken();
-                await _client.EventTypeDELETEAsync(id);
+                await _client.RateDELETEAsync(id);
                 return new Response<int>() { Success = true };
             }
             catch (ApiException ex)
@@ -92,12 +93,12 @@ namespace CharityCalculator.UI.Services
             }
         }
 
-        public async Task<ICollection<double>> GetDonationOptimalSplits(DonationOptimalSplitVM donationOptimalSplit)
+        public async Task<double> GetDeductibleAmount(DeductibleAmountVM deductibleAmount)
         {
-            var donationOptimalSplitDto = _mapper.Map<DonationOptimalSplitDto>(donationOptimalSplit);
+            var deductibleAmountDto = _mapper.Map<DeductibleAmountDto>(deductibleAmount);
             AddBearerToken();
-            var optimalSplit = await _client.GetDonationOptimalSplitsAsync(donationOptimalSplitDto);
-            return optimalSplit;
+            var amountDeductible = await _client.GetDeductibleAmountAsync(deductibleAmountDto);
+            return amountDeductible;
         }
     }
 }
