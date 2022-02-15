@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using CharityCalculator.Domain.Exceptions;
 using CharityCalculator.Domain.Models;
-using CharityCalculator.Domain.Types;
 using Shouldly;
 using Xunit;
 
-namespace CharityCalculator.Domain.Tests
+namespace CharityCalculator.Domain.Tests.Unit
 {
     public class EventTypeTest
     {

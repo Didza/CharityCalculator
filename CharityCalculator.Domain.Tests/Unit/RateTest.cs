@@ -4,7 +4,7 @@ using Shouldly;
 using Xunit;
 using static CharityCalculator.Domain.Types.Enums;
 
-namespace CharityCalculator.Domain.Tests
+namespace CharityCalculator.Domain.Tests.Unit
 {
     public class RateTest
     {

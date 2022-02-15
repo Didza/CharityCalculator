@@ -9,6 +9,7 @@ using CharityCalculator.Application.Features.EventTypes.Requests.Commands;
 using CharityCalculator.Application.Features.EventTypes.Requests.Queries;
 using CharityCalculator.Application.Responses;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 
 namespace CharityCalculator.Api.Controllers
@@ -25,22 +26,24 @@ namespace CharityCalculator.Api.Controllers
         }
         // GET: api/<EventTypeController>
         [HttpGet]
-        public async Task<List<EventTypeDto>> Get()
+        public async Task<ActionResult<List<EventTypeDto>>> Get()
         {
             var eventTypesDto = await _mediator.Send(new GetEventTypeListRequest());
-            return eventTypesDto;
+            return Ok(eventTypesDto);
         }
 
         // GET api/<EventTypeController>/guid
         [HttpGet("{id}")]
-        public async Task<EventTypeDto> Get(Guid id)
+        public async Task<ActionResult<EventTypeDto>> Get(Guid id)
         {
             var eventTypeDto = await _mediator.Send(new GetEventTypeItemRequest{Id = id});
-            return eventTypeDto;
+            return Ok(eventTypeDto);
         }
 
         // POST api/<EventTypeController>
         [HttpPost]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         public async Task<BaseResponse> Post([FromBody] EventTypeDto eventTypeDto)
         {
             await eventTypeDto.ValidateEventTypeDto();
@@ -50,6 +53,9 @@ namespace CharityCalculator.Api.Controllers
 
         // PUT api/<EventTypeController>
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult> Put([FromBody] EventTypeDto eventTypeDto)
         {
             await eventTypeDto.ValidateEventTypeDto();
@@ -60,6 +66,9 @@ namespace CharityCalculator.Api.Controllers
 
         // DELETE api/<EventTypeController>/guid
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult> Delete(Guid id)
         {
             await _mediator.Send(new DeleteEventTypeCommand { Id = id});
@@ -68,10 +77,10 @@ namespace CharityCalculator.Api.Controllers
 
         // GET api/<EventTypeController>/GetDonationOptimalSplits
         [HttpGet("GetDonationOptimalSplits")]
-        public async Task<List<decimal>> GetDonationOptimalSplits(DonationOptimalSplitDto donationOptimalSplitDto)
+        public async Task<ActionResult<List<decimal>>> GetDonationOptimalSplits(DonationOptimalSplitDto donationOptimalSplitDto)
         {
             var optimalSplits = await _mediator.Send(new GetDonationOptimalSplitRequest { DonationOptimalSplitDto = donationOptimalSplitDto });
-            return optimalSplits;
+            return Ok(optimalSplits);
         }
     }
 }
