@@ -25,8 +25,14 @@ namespace CharityCalculator.UI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient<IClient, Client>(cl => cl.BaseAddress = new Uri("https://localhost:44336"));
+           
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
             services.AddSingleton<ILocalStorageService, LocalStorageService>();
+
+            services.AddScoped<IEventTypeService, EventTypeService>();
+            services.AddScoped<IRateService, RateService>();
+
             services.AddControllersWithViews();
         }
 

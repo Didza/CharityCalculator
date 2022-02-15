@@ -2,6 +2,7 @@
 using System.Net;
 using System.Threading.Tasks;
 using CharityCalculator.Application.Exceptions;
+using CharityCalculator.Application.Responses;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
@@ -38,8 +39,12 @@ namespace CharityCalculator.Api.Middleware
             switch (exception)
             {
                 case ValidationException validationException:
-                    statusCode = HttpStatusCode.BadRequest;
-                    result = JsonConvert.SerializeObject(validationException.Errors);
+                    statusCode = HttpStatusCode.OK;
+                    var response = new BaseResponse();
+                    response.Success = false;
+                    response.Message = "Creation Failed";
+                    response.Errors = validationException.Errors;
+                    result = JsonConvert.SerializeObject(response);
                     break;
                 case NotFoundException notFoundException:
                     statusCode = HttpStatusCode.NotFound;

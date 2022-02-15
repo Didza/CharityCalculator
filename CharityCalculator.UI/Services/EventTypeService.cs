@@ -40,9 +40,9 @@ namespace CharityCalculator.UI.Services
             try
             {
                 var response = new Response<Guid>();
-                EventTypeDto createLeaveType = _mapper.Map<EventTypeDto>(eventType);
+                EventTypeDto eventTypeDto = _mapper.Map<EventTypeDto>(eventType);
                 AddBearerToken();
-                var apiResponse = await _client.EventTypePOSTAsync(createLeaveType);
+                var apiResponse = await _client.EventTypePOSTAsync(eventTypeDto);
                 if (apiResponse.Success)
                 {
                     response.Data = apiResponse.Id;
