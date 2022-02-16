@@ -9,6 +9,7 @@ using CharityCalculator.Application.Features.EventTypes.Requests.Commands;
 using CharityCalculator.Application.Features.EventTypes.Requests.Queries;
 using CharityCalculator.Application.Responses;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 
 
@@ -16,6 +17,7 @@ namespace CharityCalculator.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class EventTypeController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -44,6 +46,7 @@ namespace CharityCalculator.Api.Controllers
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [Authorize(Roles = "EventPromoter")]
         public async Task<BaseResponse> Post([FromBody] EventTypeDto eventTypeDto)
         {
             await eventTypeDto.ValidateEventTypeDto();
@@ -56,6 +59,7 @@ namespace CharityCalculator.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
+        [Authorize(Roles = "EventPromoter")]
         public async Task<ActionResult> Put([FromBody] EventTypeDto eventTypeDto)
         {
             await eventTypeDto.ValidateEventTypeDto();
@@ -69,6 +73,7 @@ namespace CharityCalculator.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
+        [Authorize(Roles = "EventPromoter")]
         public async Task<ActionResult> Delete(Guid id)
         {
             await _mediator.Send(new DeleteEventTypeCommand { Id = id});

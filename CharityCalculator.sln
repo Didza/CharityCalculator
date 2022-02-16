@@ -29,7 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CharityCalculator.Api", "Ch
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CharityCalculator.Application.Tests", "CharityCalculator.Application.Tests\CharityCalculator.Application.Tests.csproj", "{C33B993F-44D8-4494-BF3C-A2527D818F33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharityCalculator.UI", "CharityCalculator.UI\CharityCalculator.UI.csproj", "{CE7E41CA-F4C9-4FAD-B57C-141018E9DB8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CharityCalculator.UI", "CharityCalculator.UI\CharityCalculator.UI.csproj", "{CE7E41CA-F4C9-4FAD-B57C-141018E9DB8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharityCalculator.Identity", "CharityCalculator.Identity\CharityCalculator.Identity.csproj", "{930098C2-B5D2-46F1-A0AE-22EC7EB7BE05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{CE7E41CA-F4C9-4FAD-B57C-141018E9DB8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE7E41CA-F4C9-4FAD-B57C-141018E9DB8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE7E41CA-F4C9-4FAD-B57C-141018E9DB8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{930098C2-B5D2-46F1-A0AE-22EC7EB7BE05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{930098C2-B5D2-46F1-A0AE-22EC7EB7BE05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{930098C2-B5D2-46F1-A0AE-22EC7EB7BE05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{930098C2-B5D2-46F1-A0AE-22EC7EB7BE05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +92,7 @@ Global
 		{E6E89794-706F-45D5-9835-D40D3E6EE75D} = {B45D219A-6C15-4577-B0D8-94BBA5070653}
 		{C33B993F-44D8-4494-BF3C-A2527D818F33} = {590C6ADB-62C6-40C0-AE57-679F2C90A2D0}
 		{CE7E41CA-F4C9-4FAD-B57C-141018E9DB8A} = {B02E8CED-6D1A-4E75-BC42-20C2106D6417}
+		{930098C2-B5D2-46F1-A0AE-22EC7EB7BE05} = {71CA58C8-FA0E-4A8D-905F-C3B0E18692F6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {123D7994-2083-476F-AA9A-AD0C3BE81F4E}

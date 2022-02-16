@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CharitiyCalculator.Application\CharityCalculator.Application.csproj" />
+    <ProjectReference Include="..\CharityCalculator.Identity\CharityCalculator.Identity.csproj" />
     <ProjectReference Include="..\CharityCalculator.Infrastructure\CharityCalculator.Infrastructure.csproj" />
     <ProjectReference Include="..\CharityCalculator.Persistence\CharityCalculator.Persistence.csproj" />
   </ItemGroup>
