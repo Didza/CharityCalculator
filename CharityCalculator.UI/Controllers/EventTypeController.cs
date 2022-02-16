@@ -88,25 +88,27 @@ namespace CharityCalculator.UI.Controllers
             return View(eventType);
         }
 
-        // GET: EventTypeController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
         // POST: EventTypeController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(Guid id)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var response = await _eventTypeService.DeleteEventType(id);
+                if (response.Success)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                ModelState.AddModelError("", response.ValidationErrors);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", ex.Message);
             }
+
+            return BadRequest();
         }
     }
 }
