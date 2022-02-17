@@ -10,6 +10,7 @@ using CharityCalculator.Application.Features.Rates.Requests.Commands;
 using CharityCalculator.Application.Features.Rates.Requests.Queries;
 using CharityCalculator.Application.Responses;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -18,6 +19,7 @@ namespace CharityCalculator.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize] 
     public class RateController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -47,6 +49,7 @@ namespace CharityCalculator.Api.Controllers
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [Authorize(Roles = "SiteAdministrator")]
         public async Task<ActionResult<BaseResponse>> Post([FromBody] RateDto rateDto)
         {
             await rateDto.ValidateRateDto();
@@ -59,6 +62,7 @@ namespace CharityCalculator.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
+        [Authorize(Roles = "SiteAdministrator")]
         public async Task<ActionResult> Put([FromBody] RateDto rateDto)
         {
             await rateDto.ValidateRateDto();

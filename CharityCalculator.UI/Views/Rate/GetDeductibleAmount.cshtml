@@ -1,0 +1,42 @@
+﻿@model CharityCalculator.UI.Models.DeductibleAmountVM
+
+@{
+    ViewData["Title"] = "GetDeductibleAmount";
+}
+
+<h1>GetDeductibleAmount</h1>
+
+<h4>DeductibleAmountVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="GetDeductibleAmount">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.RateType)
+                    @Html.DropDownListFor(m => m.RateType, Model.RateTypes)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.EventTypeDtoId)
+                    @Html.DropDownListFor(m => m.EventTypeDtoId, Model.EventTypes)
+                </div>
+                <div class="form-group">
+                    <label asp-for="DonationAmount" class="control-label"></label>
+                    <input asp-for="DonationAmount" class="form-control" />
+                    <span asp-validation-for="DonationAmount" class="text-danger"></span>
+                </div>
+            <div class="form-group">
+                <input type="submit" value="Get Deductible Amount" class="btn btn-primary" />
+            </div>
+            <div>
+                <span>Your deductible amount is: </span>
+                <span>@Model.DeductibleAmountResult </span>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
