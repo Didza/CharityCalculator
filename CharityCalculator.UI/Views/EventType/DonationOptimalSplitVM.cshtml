@@ -1,0 +1,46 @@
+﻿@model CharityCalculator.UI.Models.DonationOptimalSplitVM
+
+@{
+    ViewData["Title"] = "DonationOptimalSplitVM";
+}
+
+<h1>DonationOptimalSplitVM</h1>
+
+<h4>DonationOptimalSplitVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="DonationOptimalSplitVM">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.LabelFor(m => m.EventTypeDtoId)
+            @Html.DropDownListFor(m => m.EventTypeDtoId, Model.EventTypes)
+            <div class="form-group">
+                <label asp-for="DonationAmount" class="control-label"></label>
+                <input asp-for="DonationAmount" class="form-control" />
+                <span asp-validation-for="DonationAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Get Optimal Donation Split" class="btn btn-primary" />
+            </div>
+            @if (Model.SplitResult != null)
+            {
+                @foreach (var item in Model.SplitResult)
+                {
+                    <p>
+                        @item
+                    </p>
+                }
+            }
+
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

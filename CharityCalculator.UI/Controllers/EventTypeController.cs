@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CharityCalculator.UI.Contracts;
 using CharityCalculator.UI.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CharityCalculator.UI.Controllers
 {
@@ -109,6 +110,52 @@ namespace CharityCalculator.UI.Controllers
             }
 
             return BadRequest();
+        }
+
+        private async Task<IEnumerable<SelectListItem>> GetEventTypes()
+        {
+
+            var model = await _eventTypeService.GetEventTypes();
+            var eventTypes = model.Select(x =>
+                    new SelectListItem
+                    {
+                        Value = x.Id.ToString(),
+                        Text = x.Name
+                    });
+
+            return new SelectList(eventTypes, "Value", "Text");
+        }
+
+        public async Task<ActionResult> DonationOptimalSplitVM()
+        {
+            var model = new DonationOptimalSplitVM
+            {
+                EventTypes = await GetEventTypes()
+            };
+            return View(model);
+        }
+
+        // POST: EventTypeController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DonationOptimalSplitVM(DonationOptimalSplitVM donationOptimalSplit)
+        {
+            try
+            {
+                var response = await _eventTypeService.GetDonationOptimalSplits(donationOptimalSplit);
+
+                donationOptimalSplit.SplitResult = response;
+                donationOptimalSplit.EventTypes = await GetEventTypes();
+                donationOptimalSplit.EventTypes
+                    .First(x => x.Value == donationOptimalSplit.EventTypeDtoId.ToString()).Selected = true;
+
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+            }
+
+            return View(donationOptimalSplit);
         }
     }
 }

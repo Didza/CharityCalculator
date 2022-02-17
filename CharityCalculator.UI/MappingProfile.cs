@@ -16,6 +16,7 @@ namespace CharityCalculator.UI
             CreateMap<DonationOptimalSplitDto, DonationOptimalSplitVM>().ReverseMap();
             CreateMap<RateDto, RateVM>().ReverseMap();
             CreateMap<DeductibleAmountDto, DeductibleAmountVM>().ReverseMap();
+            CreateMap<RegisterVM, RegistrationRequest>().ReverseMap();
         }
     }
 }

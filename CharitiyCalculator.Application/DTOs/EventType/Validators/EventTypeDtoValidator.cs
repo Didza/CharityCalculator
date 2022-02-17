@@ -15,12 +15,10 @@ namespace CharityCalculator.Application.DTOs.EventType.Validators
                 .MaximumLength(50).WithMessage("{PropertyName} must not exceed 50 characters.");
 
             RuleFor(p => p.SupplementInPercentage)
-                .NotEmpty().WithMessage("{PropertyName} is required")
                 .GreaterThanOrEqualTo(0).WithMessage("{PropertyName} must be greater than or equal to 0.")
                 .LessThanOrEqualTo(100).WithMessage("{PropertyName} must be less than or equal to 100.");
 
             RuleFor(p => p.MaximumDonationAmount)
-                .NotEmpty().WithMessage("{PropertyName} is required")
                 .GreaterThanOrEqualTo(0).WithMessage("{PropertyName} must be greater than or equal to 0.");
 
         }
