@@ -175,7 +175,7 @@ namespace CharityCalculator.UI.Controllers
                 ModelState.AddModelError("", ex.Message);
             }
 
-            return View(deductibleAmount);
+            return Json(deductibleAmount);
         }
     }
 }

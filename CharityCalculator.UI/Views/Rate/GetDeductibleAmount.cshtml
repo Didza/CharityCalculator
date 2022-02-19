@@ -9,7 +9,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="GetDeductibleAmount">
+        <form data-ajax="true" data-ajax-success="deductibleAmountResult" asp-action="GetDeductibleAmount">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.RateType)
@@ -29,7 +29,7 @@
             </div>
             <div>
                 <span>Your deductible amount is: </span>
-                <span>@Model.DeductibleAmountResult </span>
+                <div id="showresults"> </div>
             </div>
         </form>
     </div>
@@ -37,5 +37,11 @@
 
 
 @section Scripts {
+    <script>
+        function deductibleAmountResult(data) {
+            document.getElementById("showresults").innerHTML = data.deductibleAmountResult;
+
+        }
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

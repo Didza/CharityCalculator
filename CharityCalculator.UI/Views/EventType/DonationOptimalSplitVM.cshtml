@@ -9,7 +9,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="DonationOptimalSplitVM">
+        <form data-ajax="true" data-ajax-success="optimalDonationSplitResult" asp-action="DonationOptimalSplitVM">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @Html.LabelFor(m => m.EventTypeDtoId)
             @Html.DropDownListFor(m => m.EventTypeDtoId, Model.EventTypes)
@@ -21,15 +21,12 @@
             <div class="form-group">
                 <input type="submit" value="Get Optimal Donation Split" class="btn btn-primary" />
             </div>
-            @if (Model.SplitResult != null)
-            {
-                @foreach (var item in Model.SplitResult)
-                {
-                    <p>
-                        @item
-                    </p>
-                }
-            }
+            
+            <p>You can split you donation into:</p>
+            <div id="showresults">
+                
+            </div>
+    
 
 
         </form>
@@ -42,5 +39,12 @@
     </div>
 }
 @section Scripts {
+    <script>
+        function optimalDonationSplitResult(data) {
+            document.getElementById("showresults").innerHTML = data.splitResult.join();
+        }
+    </script>
+
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
