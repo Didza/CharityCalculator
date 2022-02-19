@@ -26,7 +26,7 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="EventType" asp-action="DonationOptimalSplitVM">Donation Optimal Splits</a>
+                                <a class="nav-link text-dark"  data-ajax="true" data-ajax-success="getOptimalDonationSplitPartialView" asp-area="" asp-controller="EventType" asp-action="DonationOptimalSplitVM">Donation Optimal Splits</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Rate" asp-action="GetDeductibleAmount">Deductible Amounts</a>
@@ -42,7 +42,7 @@
                                         Manage
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item text-dark" asp-controller="EventType" asp-action="Index">Event Types</a>
+                                        <a data-ajax="true" data-ajax-success="getEventTypeIndex" class="dropdown-item text-dark" asp-controller="EventType" asp-action="Index">Event Types</a>
                                     </div>
                                 </li>
                             }
@@ -73,7 +73,7 @@
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main id="main" role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
@@ -89,5 +89,19 @@
     <script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     <script src="~/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        function getOptimalDonationSplitPartialView(data) {
+            document.getElementById("main").innerHTML = data;
+        }
+
+        function optimalDonationSplitResult(data) {
+            document.getElementById("donationSplitResult").innerHTML = data.splitResult.join();
+        }
+
+        function getEventTypeIndex(data) {
+            document.getElementById("main").innerHTML = data;
+        }
+    </script>
+
 </body>
 </html>

@@ -1,0 +1,54 @@
+﻿@model CharityCalculator.UI.Models.DonationOptimalSplitVM
+
+@{
+    ViewData["Title"] = "DonationOptimalSplitVM";
+}
+
+<h1>Donation Optimal Split</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form data-ajax="true" data-ajax-success="optimalDonationSplitResult" asp-action="DonationOptimalSplitVM">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.LabelFor(m => m.EventTypeDtoId)
+            @Html.DropDownListFor(m => m.EventTypeDtoId, Model.EventTypes)
+            <div class="form-group">
+                <label asp-for="DonationAmount" class="control-label"></label>
+                <input asp-for="DonationAmount" class="form-control" />
+                <span asp-validation-for="DonationAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Get Optimal Donation Split" class="btn btn-primary" />
+            </div>
+            
+            <p>You can split your donation into:</p>
+            <div id="donationSplitResult">
+                
+            </div>
+    
+
+
+        </form>
+    </div>
+</div>
+@if (User.IsInRole("EventPromoter"))
+{
+    <div>
+        <a data-ajax="true" data-ajax-success="getEventTypeIndex" asp-action="Index">Back to List</a>
+    </div>
+}
+@section Scripts {
+    <script>
+        function optimalDonationSplitResult(data) {
+            document.getElementById("donationSplitResult").innerHTML = data.splitResult.join();
+        }
+
+        function getEventTypeIndex(data) {
+            document.getElementById("main").innerHTML = data;
+        }
+    </script>
+
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

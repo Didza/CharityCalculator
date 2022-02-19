@@ -22,7 +22,7 @@ namespace CharityCalculator.UI.Controllers
         public async Task<ActionResult> Index()
         {
             var model = await _eventTypeService.GetEventTypes();
-            return View(model);
+            return PartialView("_EventTypeIndex", model);
         }
 
         // GET: EventTypeController/Details/5
@@ -132,7 +132,7 @@ namespace CharityCalculator.UI.Controllers
             {
                 EventTypes = await GetEventTypes()
             };
-            return View(model);
+            return PartialView("_DonationOptimalSplitVM", model);
         }
 
         // POST: EventTypeController/Create
