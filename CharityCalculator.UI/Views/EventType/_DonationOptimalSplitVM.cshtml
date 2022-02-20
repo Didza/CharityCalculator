@@ -22,8 +22,8 @@
                 <input type="submit" value="Get Optimal Donation Split" class="btn btn-primary" />
             </div>
             
-            <p>You can split you donation into:</p>
-            <div id="showresults">
+            <p>You can split your donation into:</p>
+            <div id="donationSplitResult">
                 
             </div>
     
@@ -35,16 +35,10 @@
 @if (User.IsInRole("EventPromoter"))
 {
     <div>
-        <a asp-action="Index">Back to List</a>
+        <a data-ajax="true" data-ajax-success="getEventTypeIndex" asp-action="Index">Back to List</a>
     </div>
 }
 @section Scripts {
-    <script>
-        function optimalDonationSplitResult(data) {
-            document.getElementById("showresults").innerHTML = data.splitResult.join();
-        }
-    </script>
-
 
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

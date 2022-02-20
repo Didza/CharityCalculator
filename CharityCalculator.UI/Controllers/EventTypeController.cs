@@ -29,13 +29,13 @@ namespace CharityCalculator.UI.Controllers
         public async Task<ActionResult> Details(Guid id)
         {
             var model = await _eventTypeService.GetEventType(id);
-            return View(model);
+            return PartialView("_EventTypeDetails",model);
         }
 
         // GET: EventTypeController/Create
         public async Task<ActionResult> Create()
         {
-            return View();
+            return PartialView("_EventTypeCreate");
         }
 
         // POST: EventTypeController/Create
@@ -57,14 +57,14 @@ namespace CharityCalculator.UI.Controllers
                 ModelState.AddModelError("", ex.Message);
             }
 
-            return View(eventType);
+            return PartialView("_EventTypeCreate", eventType);
         }
 
         // GET: EventTypeController/Edit/<Guid>
         public async Task<ActionResult> Edit(Guid id)
         {
             var model = await _eventTypeService.GetEventType(id);
-            return View(model);
+            return PartialView("_EventTypeEdit", model);
         }
 
         // POST: EventTypeController/Edit/5
@@ -86,7 +86,7 @@ namespace CharityCalculator.UI.Controllers
                 ModelState.AddModelError("", ex.Message);
             }
 
-            return View(eventType);
+            return PartialView("_EventTypeEdit", eventType);
         }
 
 

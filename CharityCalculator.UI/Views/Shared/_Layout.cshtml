@@ -35,7 +35,7 @@
                             if (User.IsInRole("EventPromoter"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="EventType" asp-action="Create">Add Event Types</a>
+                                    <a data-ajax="true" data-ajax-success="getEventTypeCreatePage" class="nav-link text-dark" asp-area="" asp-controller="EventType" asp-action="Create">Add Event Types</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -99,6 +99,18 @@
         }
 
         function getEventTypeIndex(data) {
+            document.getElementById("main").innerHTML = data;
+        }
+
+        function getEventTypeEditPage(data) {
+            document.getElementById("main").innerHTML = data;
+        }
+
+        function getEventTypeCreatePage(data) {
+            document.getElementById("main").innerHTML = data;
+        }
+
+        function getEventTypeDetailPage(data) {
             document.getElementById("main").innerHTML = data;
         }
     </script>
