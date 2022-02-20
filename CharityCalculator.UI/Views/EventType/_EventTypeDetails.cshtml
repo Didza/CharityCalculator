@@ -31,10 +31,10 @@
     </dl>
 </div>
 <div>
-    <form data-ajax="true" data-ajax-success="getEventTypeEditPage" asp-action="Edit" asp-route-id="@Model.Id" method="get">
+    <form data-ajax="true" data-ajax-success="getPartialView" asp-action="Edit" asp-route-id="@Model.Id" method="get">
         <button type="submit" class="btn btn-link">
             Edit
         </button>
     </form> |
-    <a data-ajax="true" data-ajax-success="getEventTypeIndex" asp-action="Index">Back to List</a>
+    <a data-ajax="true" data-ajax-success="getPartialView" asp-action="Index">Back to List</a>
 </div>

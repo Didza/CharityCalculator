@@ -26,23 +26,23 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark"  data-ajax="true" data-ajax-success="getOptimalDonationSplitPartialView" asp-area="" asp-controller="EventType" asp-action="DonationOptimalSplitVM">Donation Optimal Splits</a>
+                                <a class="nav-link text-dark"  data-ajax="true" data-ajax-success="getPartialView" asp-area="" asp-controller="EventType" asp-action="DonationOptimalSplitVM">Donation Optimal Splits</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Rate" asp-action="GetDeductibleAmount">Deductible Amounts</a>
+                                <a class="nav-link text-dark" data-ajax="true" data-ajax-success="getPartialView" asp-area="" asp-controller="Rate" asp-action="GetDeductibleAmount">Deductible Amounts</a>
                             </li>
 
                             if (User.IsInRole("EventPromoter"))
                             {
                                 <li class="nav-item">
-                                    <a data-ajax="true" data-ajax-success="getEventTypeCreatePage" class="nav-link text-dark" asp-area="" asp-controller="EventType" asp-action="Create">Add Event Types</a>
+                                    <a data-ajax="true" data-ajax-success="getPartialView" class="nav-link text-dark" asp-area="" asp-controller="EventType" asp-action="Create">Add Event Types</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Manage
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a data-ajax="true" data-ajax-success="getEventTypeIndex" class="dropdown-item text-dark" asp-controller="EventType" asp-action="Index">Event Types</a>
+                                        <a data-ajax="true" data-ajax-success="getPartialView" class="dropdown-item text-dark" asp-controller="EventType" asp-action="Index">Event Types</a>
                                     </div>
                                 </li>
                             }
@@ -51,14 +51,14 @@
                             if (User.IsInRole("SiteAdministrator"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Rate" asp-action="Create">Add Rates</a>
+                                    <a class="nav-link text-dark" data-ajax="true" data-ajax-success="getPartialView" asp-area="" asp-controller="Rate" asp-action="Create">Add Rates</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Manage
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item text-dark" asp-controller="Rate" asp-action="Index">Rates</a>
+                                        <a class="dropdown-item text-dark" data-ajax="true" data-ajax-success="getPartialView" asp-controller="Rate" asp-action="Index">Rates</a>
                                     </div>
                                 </li>
                             }
@@ -90,28 +90,17 @@
     <script src="~/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
     <script>
-        function getOptimalDonationSplitPartialView(data) {
-            document.getElementById("main").innerHTML = data;
-        }
-
         function optimalDonationSplitResult(data) {
             document.getElementById("donationSplitResult").innerHTML = data.splitResult.join();
         }
 
-        function getEventTypeIndex(data) {
+        function getPartialView(data) {
             document.getElementById("main").innerHTML = data;
         }
 
-        function getEventTypeEditPage(data) {
-            document.getElementById("main").innerHTML = data;
-        }
+        function deductibleAmountResult(data) {
+            document.getElementById("showresults").innerHTML = data.deductibleAmountResult;
 
-        function getEventTypeCreatePage(data) {
-            document.getElementById("main").innerHTML = data;
-        }
-
-        function getEventTypeDetailPage(data) {
-            document.getElementById("main").innerHTML = data;
         }
     </script>
 

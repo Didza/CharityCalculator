@@ -25,14 +25,14 @@ namespace CharityCalculator.UI.Controllers
         public async Task<ActionResult> Index()
         {
             var model = await _rateService.GetRates();
-            return View(model);
+            return PartialView("_RateIndex", model);
         }
 
         // GET: RateController/Details/5
         public async Task<ActionResult> Details(Guid id)
         {
             var model = await _rateService.GetRate(id);
-            return View(model);
+            return PartialView("_RateDetails", model);
         }
         private IEnumerable<SelectListItem> GetRateTypes()
         {
@@ -54,7 +54,7 @@ namespace CharityCalculator.UI.Controllers
             {
                 RateTypes = GetRateTypes()
             };
-            return View(model);
+            return PartialView("_RateCreate", model);
         }
 
         // POST: RateController/Create
@@ -76,14 +76,14 @@ namespace CharityCalculator.UI.Controllers
                 ModelState.AddModelError("", ex.Message);
             }
 
-            return View(rate);
+            return PartialView("_RateCreate", rate);
         }
 
         // GET: RateController/Edit/5
         public async Task<ActionResult> Edit(Guid id)
         {
             var model = await _rateService.GetRate(id);
-            return View(model);
+            return PartialView("_RateEdit", model);
         }
 
         // POST: RateController/Edit/5
@@ -105,7 +105,7 @@ namespace CharityCalculator.UI.Controllers
                 ModelState.AddModelError("", ex.Message);
             }
 
-            return View(rate);
+            return PartialView("_RateEdit", rate);
         }
 
 
@@ -152,7 +152,7 @@ namespace CharityCalculator.UI.Controllers
                 EventTypes = await GetEventTypes(),
                 RateTypes = GetRateTypes()
             };
-            return View(model);
+            return PartialView("_GetDeductibleAmount", model);
         }
 
         [HttpPost]

@@ -35,7 +35,7 @@
 @if (User.IsInRole("EventPromoter"))
 {
     <div>
-        <a data-ajax="true" data-ajax-success="getEventTypeIndex" asp-action="Index">Back to List</a>
+        <a data-ajax="true" data-ajax-success="getPartialView" asp-action="Index">Back to List</a>
     </div>
 }
 @section Scripts {

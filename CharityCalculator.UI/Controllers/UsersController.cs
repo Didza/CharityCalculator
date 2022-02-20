@@ -16,7 +16,7 @@ namespace CharityCalculator.UI.Controllers
 
         public IActionResult Login(string returnUrl = null)
         {
-            return View();
+            return PartialView("Login");
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CharityCalculator.UI.Controllers
 
         public IActionResult Register()
         {
-            return View();
+            return PartialView("Register");
         }
 
         [HttpPost]
@@ -50,7 +50,7 @@ namespace CharityCalculator.UI.Controllers
             }
 
             ModelState.AddModelError("", "Registration Attempt Failed. Please try again.");
-            return View(registration);
+            return View( registration);
         }
 
         [HttpPost]
