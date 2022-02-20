@@ -47,6 +47,7 @@ namespace CharityCalculator.Domain.Tests.Unit
         {
             var eventTypeDomainException = Should.Throw<EventTypeDomainException>(() => new EventType("sports", -5, 10000));
             eventTypeDomainException.ShouldNotBeNull();
+            eventTypeDomainException.ShouldBeOfType<EventTypeDomainException>();
         }
         [Fact]
         public void ShouldThrowExceptionWhenChangingFromValidSupplementPercentageToInvalidSupplementPercentageTest()
@@ -55,6 +56,7 @@ namespace CharityCalculator.Domain.Tests.Unit
            
             var eventTypeDomainException = Should.Throw<EventTypeDomainException>(() => eventType.SetSupplementPercentage(-30));
             eventTypeDomainException.ShouldNotBeNull();
+            eventTypeDomainException.ShouldBeOfType<EventTypeDomainException>();
         }
 
         [Fact]

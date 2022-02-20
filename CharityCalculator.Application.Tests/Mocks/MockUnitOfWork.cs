@@ -1,8 +1,7 @@
-﻿using Moq;
-using CharityCalculator.Application.Contracts.Persistence;
-using CharityCalculator.Application.Tests.Mocks;
+﻿using CharityCalculator.Application.Contracts.Persistence;
+using Moq;
 
-namespace HR.LeaveManagement.Application.UnitTests.Mocks
+namespace CharityCalculator.Application.Tests.Mocks
 {
     public static class MockUnitOfWork
     {

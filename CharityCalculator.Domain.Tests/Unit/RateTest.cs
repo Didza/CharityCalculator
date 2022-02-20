@@ -48,6 +48,7 @@ namespace CharityCalculator.Domain.Tests.Unit
         {
             var rateDomainException = Should.Throw<RateDomainException>(() => new Rate(RateType.TaxRate, -20));
             rateDomainException.ShouldNotBeNull();
+            rateDomainException.ShouldBeOfType<RateDomainException>();
         }
 
         [Fact]
@@ -56,6 +57,7 @@ namespace CharityCalculator.Domain.Tests.Unit
             var taxRate = new Rate(RateType.TaxRate);
             var rateDomainException = Should.Throw<RateDomainException>(() => taxRate.SetRateInPercentage(-75));
             rateDomainException.ShouldNotBeNull();
+            rateDomainException.ShouldBeOfType<RateDomainException>();
         }
 
         [Fact]
@@ -65,6 +67,7 @@ namespace CharityCalculator.Domain.Tests.Unit
 
             var rateDomainException = Should.Throw<RateDomainException>(() =>taxRate.CalculateDeductibleAmount(-2000));
             rateDomainException.ShouldNotBeNull();
+            rateDomainException.ShouldBeOfType<RateDomainException>();
         }
 
     }
