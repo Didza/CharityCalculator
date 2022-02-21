@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CharityCalculator.Persistence.Repositories
 {
-    public class EventTypeRepository : GenericRepository<EventType>, IEventTypeRepository
+    public class EventTypeRepository<T> : GenericRepository<EventType, T>, IEventTypeRepository where T : DbContext
     {
-        private readonly CharityCalculatorDbContext _dbContext;
+        private readonly BaseContext<T> _dbContext;
 
-        public EventTypeRepository(CharityCalculatorDbContext dbContext) : base(dbContext)
+        public EventTypeRepository(BaseContext<T> dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }

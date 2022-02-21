@@ -6,11 +6,11 @@ using static CharityCalculator.Domain.Types.Enums;
 
 namespace CharityCalculator.Persistence.Repositories
 {
-    public class RateRepository : GenericRepository<Rate>, IRateRepository
+    public class RateRepository<T> : GenericRepository<Rate, T>, IRateRepository where T : DbContext
     {
-        private readonly CharityCalculatorDbContext _dbContext;
+        private readonly BaseContext<T> _dbContext;
 
-        public RateRepository(CharityCalculatorDbContext dbContext) : base(dbContext)
+        public RateRepository(BaseContext<T> dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }

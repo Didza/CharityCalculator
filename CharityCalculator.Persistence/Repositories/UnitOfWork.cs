@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Threading.Tasks;
 using CharityCalculator.Application.Contracts.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace CharityCalculator.Persistence.Repositories
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork<T> : IUnitOfWork where T : DbContext
     {
 
-        private readonly CharityCalculatorDbContext _context;
+        private readonly BaseContext<T> _context;
         private IEventTypeRepository _eventTypeRepository;
         private IRateRepository _rateRepository;
 
 
-        public UnitOfWork(CharityCalculatorDbContext context)
+        public UnitOfWork(BaseContext<T> context)
         {
             _context = context;
         }
 
-        public IEventTypeRepository EventTypeRepository => _eventTypeRepository ??= new EventTypeRepository(_context);
-        public IRateRepository RateRepository => _rateRepository ??= new RateRepository(_context);
+        public IEventTypeRepository EventTypeRepository => _eventTypeRepository ??= new EventTypeRepository<T>(_context);
+        public IRateRepository RateRepository => _rateRepository ??= new RateRepository<T>(_context);
 
         public void Dispose()
         {

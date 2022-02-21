@@ -9,16 +9,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CharityCalculator.Persistence
 {
-    public class CharityCalculatorDbContext : BaseContext<CharityCalculatorDbContext>
+    public class CharityCalculatorSqliteDbContext : BaseContext<CharityCalculatorSqliteDbContext>
     {
-        public CharityCalculatorDbContext(DbContextOptions<CharityCalculatorDbContext> options) : base(options)
+        public CharityCalculatorSqliteDbContext(DbContextOptions<CharityCalculatorSqliteDbContext> options) : base(options)
         {
                 
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(CharityCalculatorDbContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(CharityCalculatorSqliteDbContext).Assembly);
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
@@ -35,6 +35,5 @@ namespace CharityCalculator.Persistence
 
             return base.SaveChangesAsync(cancellationToken);
         }
-
     }
 }

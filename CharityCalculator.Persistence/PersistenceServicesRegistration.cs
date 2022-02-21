@@ -10,13 +10,28 @@ namespace CharityCalculator.Persistence
     {
         public static IServiceCollection ConfigurePersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<CharityCalculatorDbContext>(options =>
-                options.UseSqlServer(
-                    configuration.GetConnectionString("CharityCalculatorConnectionString")));
+            if (configuration.GetValue<bool>("useInMemoryDb"))
+            {
+                services.AddDbContext<CharityCalculatorSqliteDbContext>(options =>
+                    options.UseSqlite(
+                        configuration.GetConnectionString("CharityCalculatorSqliteConnectionString")));
+            } else
+            {
+                services.AddDbContext<CharityCalculatorDbContext>(options =>
+                    options.UseSqlServer(
+                        configuration.GetConnectionString("CharityCalculatorConnectionString")));
+            }
 
-
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+           
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<,>));
+            if (configuration.GetValue<bool>("useInMemoryDb"))
+            {
+                services.AddScoped<IUnitOfWork, UnitOfWork<CharityCalculatorSqliteDbContext>>();
+            }
+            else
+            {
+                services.AddScoped<IUnitOfWork, UnitOfWork<CharityCalculatorDbContext>>();
+            }
 
             return services;
         }
