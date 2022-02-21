@@ -24,6 +24,7 @@ namespace CharityCalculator.Persistence
 
            
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<,>));
+            services.AddScoped(typeof(IBaseContext<>), typeof(BaseContext<>));
             if (configuration.GetValue<bool>("useInMemoryDb"))
             {
                 services.AddScoped<IUnitOfWork, UnitOfWork<CharityCalculatorSqliteDbContext>>();

@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CharityCalculator.Persistence.Repositories
 {
-    public class GenericRepository<T, U> : IGenericRepository<T> where U : DbContext where T : class
+    public class GenericRepository<T, U> : IGenericRepository<T> where U : DbContext, IBaseContext<U> where T : class
     {
-        private readonly BaseContext<U> _dbContext;
+        private readonly U _dbContext;
 
-        public GenericRepository(BaseContext<U> dbContext)
+        public GenericRepository(U dbContext)
         {
             _dbContext = dbContext;
         }

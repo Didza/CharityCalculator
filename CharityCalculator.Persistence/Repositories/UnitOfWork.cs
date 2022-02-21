@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CharityCalculator.Persistence.Repositories
 {
-    public class UnitOfWork<T> : IUnitOfWork where T : DbContext
+    public class UnitOfWork<T> : IUnitOfWork where T :  DbContext, IBaseContext<T>
     {
 
-        private readonly BaseContext<T> _context;
+        private readonly T _context;
         private IEventTypeRepository _eventTypeRepository;
         private IRateRepository _rateRepository;
 
 
-        public UnitOfWork(BaseContext<T> context)
+        public UnitOfWork(T context)
         {
             _context = context;
         }

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CharityCalculator.Persistence
 {
-    public class CharityCalculatorDbContext : BaseContext<CharityCalculatorDbContext>
+    public class CharityCalculatorDbContext : BaseContext<CharityCalculatorDbContext>, IBaseContext<CharityCalculatorDbContext>
     {
         public CharityCalculatorDbContext(DbContextOptions<CharityCalculatorDbContext> options) : base(options)
         {
