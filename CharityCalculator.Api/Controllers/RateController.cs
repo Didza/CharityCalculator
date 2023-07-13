@@ -52,7 +52,6 @@ namespace CharityCalculator.Api.Controllers
         [Authorize(Roles = "SiteAdministrator")]
         public async Task<ActionResult<BaseResponse>> Post([FromBody] RateDto rateDto)
         {
-            await rateDto.ValidateRateDto();
             var baseResponse = await _mediator.Send(new CreateRateCommand { RateDto = rateDto });
             return Ok(baseResponse);
         }
@@ -65,7 +64,6 @@ namespace CharityCalculator.Api.Controllers
         [Authorize(Roles = "SiteAdministrator")]
         public async Task<ActionResult> Put([FromBody] RateDto rateDto)
         {
-            await rateDto.ValidateRateDto();
             await _mediator.Send(new UpdateRateCommand { RateDto = rateDto });
             return NoContent();
         }

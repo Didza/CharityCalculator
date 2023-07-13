@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using CharityCalculator.Application.Contracts.Persistence;
 using CharityCalculator.Application.Exceptions;
+using CharityCalculator.Application.Extensions;
 using CharityCalculator.Application.Features.EventTypes.Requests.Commands;
 using MediatR;
 
@@ -19,6 +20,7 @@ namespace CharityCalculator.Application.Features.EventTypes.Handlers.Commands
         {
             using (_unitOfWork)
             {
+                await request.EventTypeDto.ValidateEventTypeDto();
                 var eventType = await _unitOfWork.EventTypeRepository.Get(request.EventTypeDto.Id);
 
                 if (eventType is null)

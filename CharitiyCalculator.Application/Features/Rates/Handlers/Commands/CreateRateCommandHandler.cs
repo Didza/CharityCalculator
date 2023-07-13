@@ -20,6 +20,7 @@ namespace CharityCalculator.Application.Features.EventTypes.Handlers.Commands
         {
             using (_unitOfWork)
             {
+                await request.RateDto.ValidateRateDto();
                 var newRate = request.RateDto.ToRate();
 
                 var rate = await _unitOfWork.RateRepository.GetByRateType(newRate.RateType);

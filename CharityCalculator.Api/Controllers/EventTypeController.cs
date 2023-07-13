@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CharityCalculator.Application.DTOs.EventType;
-using CharityCalculator.Application.Extensions;
 using CharityCalculator.Application.Features.EventTypes.Requests;
 using CharityCalculator.Application.Features.EventTypes.Requests.Commands;
 using CharityCalculator.Application.Features.EventTypes.Requests.Queries;
@@ -49,7 +48,6 @@ namespace CharityCalculator.Api.Controllers
         [Authorize(Roles = "EventPromoter")]
         public async Task<BaseResponse> Post([FromBody] EventTypeDto eventTypeDto)
         {
-            await eventTypeDto.ValidateEventTypeDto();
             var baseResponse = await _mediator.Send(new CreateEventTypeCommand{EventTypeDto = eventTypeDto});
             return baseResponse;
         }
@@ -62,7 +60,6 @@ namespace CharityCalculator.Api.Controllers
         [Authorize(Roles = "EventPromoter")]
         public async Task<ActionResult> Put([FromBody] EventTypeDto eventTypeDto)
         {
-            await eventTypeDto.ValidateEventTypeDto();
             await _mediator.Send(new UpdateEventTypeCommand { EventTypeDto = eventTypeDto });
             return NoContent();
 

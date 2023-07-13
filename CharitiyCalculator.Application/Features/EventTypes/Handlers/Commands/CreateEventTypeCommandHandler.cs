@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using CharityCalculator.Application.Contracts.Persistence;
+using CharityCalculator.Application.DTOs.EventType;
 using CharityCalculator.Application.Extensions;
 using CharityCalculator.Application.Features.EventTypes.Requests.Commands;
 using CharityCalculator.Application.Responses;
@@ -20,6 +21,7 @@ namespace CharityCalculator.Application.Features.EventTypes.Handlers.Commands
         {
             using (_unitOfWork)
             {
+                await request.EventTypeDto.ValidateEventTypeDto();
                 var newEventType = request.EventTypeDto.ToEventType();
 
                 var eventType = await _unitOfWork.EventTypeRepository.GetByName(newEventType.Name);
