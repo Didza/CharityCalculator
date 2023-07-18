@@ -30,9 +30,9 @@ namespace CharityCalculator.Domain.Tests.Unit
         [Fact]
         public void CanChangeMaximumDonationAmountTest()
         {
-            var eventType = new EventType("sports", 5, 100000);
-            eventType.SetMaximumDonationAmount(30000);
-            eventType.MaximumDonationAmount.ShouldBe(30000);
+            var eventType = new EventType("political", 5, 500000);
+            eventType.SetMaximumDonationAmount(100000);
+            eventType.MaximumDonationAmount.ShouldBe(100000);
         }
 
         [Fact]

@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using CharityCalculator.Application.Contracts.Persistence;
 using CharityCalculator.Application.DTOs.EventType;
+using CharityCalculator.Application.Exceptions;
 using CharityCalculator.Application.Features.EventTypes.Handlers.Commands;
 using CharityCalculator.Application.Features.EventTypes.Requests.Commands;
 using CharityCalculator.Application.Responses;
@@ -52,13 +53,13 @@ namespace CharityCalculator.Application.Tests.EventTypes.Commands
         {
              _eventTypeDto.SupplementInPercentage = -1;
 
-            var result = Should.Throw<EventTypeDomainException>(() =>  _handler.Handle(new CreateEventTypeCommand() { EventTypeDto = _eventTypeDto }, CancellationToken.None));
+            var result = Should.Throw<ValidationException>(() =>  _handler.Handle(new CreateEventTypeCommand() { EventTypeDto = _eventTypeDto }, CancellationToken.None));
 
             var leaveTypes = await _mockUow.Object.EventTypeRepository.GetAll();
 
             leaveTypes.Count.ShouldBe(3);
 
-            result.ShouldBeOfType<EventTypeDomainException>();
+            result.ShouldBeOfType<ValidationException>();
 
         }
     }
